@@ -14,12 +14,12 @@ function App() {
       </div>
       <h1 className="text-5xl text-green-500">Vite + React</h1>
       <iframe
-        src="http://localhost:3000/d-solo/b41b2535-5019-4ca9-9dd1-5774771c34c9/test-time-series?orgId=1&from=1699722370045&to=1699743970045&panelId=1"
+        src="http://localhost:3000/d/e9f9d352-b976-4454-a1bd-fab94c7de7a2/test-time-series?orgId=1&from=1699842966227&to=1699864566227&viewPanel=1"
         width="500"
         height="500"
       />
       <iframe
-        src="http://localhost:3000/d/fa1f745d-5eb5-494c-9ce8-e3a59b4f1f89/gauge-test?orgId=1&viewPanel=1&from=1699822169381&to=1699843769381"
+        src="http://localhost:3000/d/bea322d3-b935-479a-8ada-1b521448b3a7/test-gauge?orgId=1&from=1699843026772&to=1699864626772&viewPanel=1"
         width="500"
         height="500"
       />

@@ -27,9 +27,9 @@ const getStyles = () => {
 };
 
 export const SimplePanel: React.FC<Props> = ({ options, data, width, height }) => {
-  const theme = useTheme2();
+  // const theme = useTheme2();
   const styles = useStyles2(getStyles);
-  let color = theme.visualization.getColorByName(options.color);
+  // let color = theme.visualization.getColorByName(options.color);
   const radii = data.series
     .map((series) => series.fields.find((field) => field.type === 'number'))
     .map((field) => field?.values.get(field.values.length - 1));
@@ -65,17 +65,35 @@ export const SimplePanel: React.FC<Props> = ({ options, data, width, height }) =
   };
 
   const renderGaugeLevels = () => {
-    if (valueToDisplay >= 100) {
-      return `Warning: Max-limit Reached! ${valueToDisplay}`;
-    } else if (valueToDisplay <= 0) {
-      return `Warning: Min-limit Reached! ${valueToDisplay}`;
+    if (valueToDisplay <= 0) {
+      return 'Warning: Min-limit reached!';
+    } else if (valueToDisplay <= 20) {
+      return 'Warning: Reaching lower limit!';
+    } else if (valueToDisplay <= 40 || (valueToDisplay >= 60 && valueToDisplay < 80)) {
+      return 'Warning: Deviating from optimal threshold!';
+    } else if (valueToDisplay < 100) {
+      return 'Warning: Reaching upper limit!';
+    } else if (valueToDisplay >= 100) {
+      return 'Warning: Max-limit Reached!';
     } else {
-      return String(valueToDisplay);
+      return 'Operating in optimal range.';
     }
   };
 
   const renderGaugeStyling = () => {
-    return valueToDisplay >= 100 || valueToDisplay <= 0 ? 'red' : '';
+    if (valueToDisplay <= 0) {
+      return 'red';
+    } else if (valueToDisplay <= 20) {
+      return 'orange';
+    } else if (valueToDisplay <= 40 || (valueToDisplay >= 60 && valueToDisplay < 80)) {
+      return 'yellow';
+    } else if (valueToDisplay < 100) {
+      return 'orange';
+    } else if (valueToDisplay >= 100) {
+      return 'red';
+    } else {
+      return 'green';
+    }
   };
 
   return (
@@ -90,19 +108,28 @@ export const SimplePanel: React.FC<Props> = ({ options, data, width, height }) =
           cx={width / 2}
           cy={height / 2}
           r={circleRadius}
-          fill={color}
+          fill={renderGaugeStyling()}
           clipPath={`url(#clip-${options.panelId})`}
         />
         <text
           x={width / 2}
-          y={height / 2 - circleRadius - 20}
+          y={height / 2 - circleRadius - 60}
           textAnchor="middle"
-          fill={color}
+          fill={renderGaugeStyling()}
           fontSize="16"
           fontFamily="Open Sans"
-          color={renderGaugeStyling()}
         >
           {renderGaugeLevels()}
+        </text>
+        <text
+          x={width / 2}
+          y={height / 2 - circleRadius - 20}
+          textAnchor="middle"
+          fill="white"
+          fontSize="24"
+          fontFamily="Open Sans"
+        >
+          {`Value: ${valueToDisplay?.toFixed(2)}`}
         </text>
       </svg>
       <div className={styles.textBox}>
