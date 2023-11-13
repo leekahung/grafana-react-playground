@@ -69,14 +69,16 @@ export const SimplePanel: React.FC<Props> = ({ options, data, width, height }) =
       return 'Warning: Min-limit reached!';
     } else if (valueToDisplay <= 20) {
       return 'Warning: Reaching lower limit!';
-    } else if (valueToDisplay <= 40 || (valueToDisplay >= 60 && valueToDisplay < 80)) {
+    } else if (valueToDisplay <= 40) {
       return 'Warning: Deviating from optimal threshold!';
+    } else if (valueToDisplay <= 60) {
+      return 'Operating in optimal range.';
+    } else if (valueToDisplay <= 80) {
+      return 'Warning Deviating from optimal threshold!';
     } else if (valueToDisplay < 100) {
       return 'Warning: Reaching upper limit!';
-    } else if (valueToDisplay >= 100) {
-      return 'Warning: Max-limit Reached!';
     } else {
-      return 'Operating in optimal range.';
+      return 'Warning: Max-limit Reached!';
     }
   };
 
@@ -85,14 +87,16 @@ export const SimplePanel: React.FC<Props> = ({ options, data, width, height }) =
       return 'red';
     } else if (valueToDisplay <= 20) {
       return 'orange';
-    } else if (valueToDisplay <= 40 || (valueToDisplay >= 60 && valueToDisplay < 80)) {
+    } else if (valueToDisplay <= 40) {
+      return 'yellow';
+    } else if (valueToDisplay <= 60) {
+      return 'green';
+    } else if (valueToDisplay <= 80) {
       return 'yellow';
     } else if (valueToDisplay < 100) {
       return 'orange';
-    } else if (valueToDisplay >= 100) {
-      return 'red';
     } else {
-      return 'green';
+      return 'red';
     }
   };
 
