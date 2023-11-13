@@ -18,6 +18,11 @@ function App() {
         width="500"
         height="500"
       />
+      <iframe
+        src="http://localhost:3000/d/fa1f745d-5eb5-494c-9ce8-e3a59b4f1f89/gauge-test?orgId=1&viewPanel=1&from=1699822169381&to=1699843769381"
+        width="500"
+        height="500"
+      />
     </div>
   );
 }
